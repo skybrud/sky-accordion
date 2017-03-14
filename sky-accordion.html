@@ -1,0 +1,19 @@
+<li
+	class="skyAccordion"
+	v-bind:aria-controls="id">
+
+	<button
+		class="skyAccordion-title"
+		tabindex="0"
+		v-on:click="toggle">
+
+		<slot name="title" />
+	</button>
+
+	<sky-reveal
+		v-bind:open-reveal="open"
+		v-bind:external-id="id">
+
+		<slot />
+	</sky-reveal>
+</li>

@@ -1,0 +1,31 @@
+.skyAccordions {
+	margin: 0;
+	padding: 0;
+}
+
+.skyAccordion {
+	margin: 0;
+	display: block;
+
+	.skyReveal-content {
+		min-height: auto;
+	}
+
+	.skyReveal-content:after {
+		content: none;
+	}
+}
+
+.skyAccordion-title {
+	margin: 0;
+	width: 100%;
+	border: none;
+	font: inherit;
+	padding: 10px;
+	color: inherit;
+	cursor: pointer;
+	text-align: inherit;
+	display: inline-block;
+	vertical-align: baseline;
+	background-color: transparent;
+}
