@@ -1,31 +1,31 @@
-.skyAccordions {
+.sky-accordions {
 	margin: 0;
 	padding: 0;
 }
 
-.skyAccordion {
+.sky-accordion {
 	margin: 0;
 	display: block;
 
-	.skyReveal-content {
+	.sky-reveal .content {
 		min-height: auto;
 	}
 
-	.skyReveal-content:after {
+	.sky-reveal .content:after {
 		content: none;
 	}
-}
 
-.skyAccordion-title {
-	margin: 0;
-	width: 100%;
-	border: none;
-	font: inherit;
-	padding: 10px;
-	color: inherit;
-	cursor: pointer;
-	text-align: inherit;
-	display: inline-block;
-	vertical-align: baseline;
-	background-color: transparent;
+	.title {
+		margin: 0;
+		width: 100%;
+		border: none;
+		font: inherit;
+		padding: 10px;
+		color: inherit;
+		cursor: pointer;
+		text-align: inherit;
+		display: inline-block;
+		vertical-align: baseline;
+		background-color: transparent;
+	}
 }
