@@ -1,5 +1,5 @@
 <script>
-import { SkyReveal } from '../node_modules/sky-reveal/src/';
+import { SkyReveal } from 'sky-reveal';
 
 const defaultConfig = {
 	offset: 50,
