@@ -1,0 +1,17 @@
+<li
+	:id="accId"
+	:class="['sky-accordion', {open : isOpen}]"
+>
+
+	<button
+		class="sky-accordion-title"
+		tabindex="0"
+		@click="toggle">
+
+		<slot />
+	</button>
+
+	<SkyReveal :open="isOpen">
+		<slot name="content" />
+	</SkyReveal>
+</li>
