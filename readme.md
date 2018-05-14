@@ -1,12 +1,27 @@
 # sky-accordion
 > JS module for grouping collapsing content - uses sky-reveal as collapse/expand engine
 
-## Dependencies
-- [sky-reveal](https://github.com/skybrud/sky-reveal)
-- [TweenLite](https://github.com/greensock/GreenSock-JS)
+## Installation
+```bash
+npm install sky-accordion
+```
+or
+```bash
+yarn add sky-accordion
+```
 
 ## Usage
-Import sky-accordion
+Begin by importing and installing the SkyAccordion Vue plugin:
+```js
+import Vue from 'vue';
+import SkyAccordion from 'sky-accordion';
+
+Vue.use(SkyAccordion);
+
+```
+The `<sky-accordion>` component registers globally and can now be used.
+
+Basic example:
 ``` html
 <ul class="skyAccordions">
 	<sky-accordion>
