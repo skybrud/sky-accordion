@@ -6,7 +6,10 @@
 .sky-accordion {
 	display: block;
 	margin: 0;
-	overflow: hidden;
+
+	.sky-reveal {
+		overflow: hidden;
+	}
 }
 
 .sky-accordion-title {
