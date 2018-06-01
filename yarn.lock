@@ -4794,9 +4794,9 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
     webpack "^3.11.0"
     webpack-merge "^4.1.0"
 
-sky-reveal@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/sky-reveal/-/sky-reveal-0.0.1.tgz#642937c4aebdea906dd78fd7544253f38c491941"
+sky-reveal@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/sky-reveal/-/sky-reveal-0.1.0.tgz#6a3bffa691549444525d713d8334755f7ce73b2b"
   dependencies:
     animejs "^2.2.0"
 
