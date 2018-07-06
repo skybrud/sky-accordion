@@ -14,7 +14,6 @@ const SkyAccordionStore = new Vue({
 			} else {
 				this.accordions[index] = accordion;
 			}
-			console.log('add', this.accordions);
 		},
 		remove(accordion) {
 			const index = this.accordions.indexOf(accordion);
@@ -26,7 +25,6 @@ const SkyAccordionStore = new Vue({
 			this.accordions
 				.filter(acc => exclude.indexOf(acc) === -1)
 				.forEach((acc) => {
-					console.log('toggleAll', acc);
 					acc.$set(acc, 'isOpen', false);
 				});
 		},
