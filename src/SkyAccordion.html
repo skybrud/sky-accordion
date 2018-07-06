@@ -8,10 +8,10 @@
 		tabindex="0"
 		@click="toggle">
 
-		<slot />
+		<slot name="title" />
 	</button>
 
 	<SkyReveal :open="isOpen">
-		<slot name="content" />
+		<slot />
 	</SkyReveal>
 </li>
