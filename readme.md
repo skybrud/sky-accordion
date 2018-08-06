@@ -16,7 +16,14 @@ Begin by importing and installing the SkyAccordion Vue plugin:
 import Vue from 'vue';
 import SkyAccordion from 'sky-accordion';
 
-Vue.use(SkyAccordion);
+Vue.use(SkyAccordion, {
+	registerComponents: true, // Whether or not to auto-register <SkyAccordion /> component
+	accordionDefaults: {
+		offset: 50, // pixel offset when scrolling to
+		deeplink: false, // deeplinkable (using #accordionId)
+		closeOthersOnOpen: false, // if true, only one accordion will be open at a time
+	},
+});
 
 ```
 The `<sky-accordion>` component registers globally and can now be used.
