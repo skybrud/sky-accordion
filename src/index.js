@@ -11,22 +11,24 @@ const defaults = {
 
 export { SkyAccordion };
 
-export default {
-	install(Vue, options) {
-		const { registerComponents, accordionDefaults } = Object.assign({}, defaults, options);
+export default function install(Vue, options) {
+	if (install.installed === true) {
+		return;
+	}
 
-		if (registerComponents) {
-			Vue.component(SkyAccordion.name, Object.assign(
-				{},
-				SkyAccordion,
-				{
-					computed: {
-						config() {
-							return Object.assign({}, accordionDefaults, this.options);
-						},
+	const { registerComponents, accordionDefaults } = Object.assign({}, defaults, options);
+
+	if (registerComponents) {
+		Vue.component(SkyAccordion.name, Object.assign(
+			{},
+			SkyAccordion,
+			{
+				computed: {
+					config() {
+						return Object.assign({}, accordionDefaults, this.options);
 					},
 				},
-			));
-		}
-	},
+			},
+		));
+	}
 };

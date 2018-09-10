@@ -1,29 +1,28 @@
 {
-  "name": "sky-accordion",
-  "version": "1.0.0",
-  "description": "Vue component for grouped foldable content",
-  "main": "dist/skyaccordion.min.js",
-  "scripts": {
-    "build": "rimraf ./dist && webpack --config ./webpack.config.js",
-    "dist": "yarn install && yarn run build",
-    "update": "rimraf ./node_modules && yarn run dist"
-  },
-  "build": "plugin",
-  "author": "Skybrud.dk",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/skybrud/sky-accordion.git"
-  },
-  "dependencies": {
-    "sky-reveal": "0.1.0"
-  },
-  "devDependencies": {
-    "np": "*",
-    "sky-build-setup": "https://github.com/skybrud/sky-build-setup.git#^1.0.0",
-    "vue": "^2.5.0"
-  },
-  "peerDependencies": {
-    "vue": "^2.5.0"
-  }
+	"name": "sky-accordion",
+	"version": "1.0.0",
+	"description": "Vue component for grouped foldable content",
+	"main": "./dist/sky-accordion.ssr.js",
+	"module": "./dist/sky-accordion.esm.js",
+	"browser": "./dist/sky-accordion.js",
+	"unpkg": "./dist/sky-accordion.js",
+	"scripts": {
+		"dist": "yarn rimraf dist && yarn run build",
+		"build": "yarn rollup --config rollup.config.js --environment BUILD:production"
+	},
+	"author": "Skybrud.dk",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/skybrud/sky-accordion.git"
+	},
+	"dependencies": {
+		"sky-reveal": "^0.1.0"
+	},
+	"devDependencies": {
+		"sky-build-setup": "https://github.com/skybrud/sky-build-setup.git"
+	},
+	"peerDependencies": {
+		"vue": "^2.5.0"
+	}
 }
