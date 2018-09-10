@@ -20,6 +20,7 @@
 		"sky-reveal": "^0.1.0"
 	},
 	"devDependencies": {
+		"vue": "^2.5.0",
 		"sky-build-setup": "https://github.com/skybrud/sky-build-setup.git"
 	},
 	"peerDependencies": {
