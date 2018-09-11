@@ -643,8 +643,8 @@ rollup@^0.65.2:
     "@types/node" "*"
 
 "sky-build-setup@https://github.com/skybrud/sky-build-setup.git":
-  version "2.0.2"
-  resolved "https://github.com/skybrud/sky-build-setup.git#ac081ddcc9a0aa7090f4f185fcd6783bd9b43171"
+  version "2.0.3"
+  resolved "https://github.com/skybrud/sky-build-setup.git#a8b1dbbf08e3020d180d3bac5508bbcf683f4fac"
   dependencies:
     postcss "^7.0.2"
     rimraf "^2.6.2"
@@ -652,11 +652,12 @@ rollup@^0.65.2:
     rollup-plugin-vue "^4.3.2"
     vue-template-compiler "^2.5.17"
 
-sky-reveal@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/sky-reveal/-/sky-reveal-0.1.0.tgz#6a3bffa691549444525d713d8334755f7ce73b2b"
+sky-reveal@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/sky-reveal/-/sky-reveal-0.4.1.tgz#aeedcf128534a78d5f2d88328770103b16a58af2"
   dependencies:
     animejs "^2.2.0"
+    vue "^2.5.17"
 
 source-map@0.6.*, source-map@^0.6.1, source-map@~0.6.0:
   version "0.6.1"
@@ -707,7 +708,7 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue@^2.5.0:
+vue@^2.5.17:
   version "2.5.17"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
 

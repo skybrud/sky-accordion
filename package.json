@@ -4,8 +4,7 @@
 	"description": "Vue component for grouped foldable content",
 	"main": "./dist/sky-accordion.ssr.js",
 	"module": "./dist/sky-accordion.esm.js",
-	"browser": "./dist/sky-accordion.js",
-	"unpkg": "./dist/sky-accordion.js",
+	"browser": "./dist/sky-accordion.esm.js",
 	"scripts": {
 		"dist": "yarn rimraf dist && yarn run build",
 		"build": "yarn rollup --config rollup.config.js --environment BUILD:production"
@@ -17,11 +16,11 @@
 		"url": "https://github.com/skybrud/sky-accordion.git"
 	},
 	"dependencies": {
-		"sky-reveal": "^0.1.0"
+		"sky-reveal": "^0.4.1",
+		"vue": "^2.5.17"
 	},
 	"devDependencies": {
-		"sky-build-setup": "https://github.com/skybrud/sky-build-setup.git",
-		"vue": "^2.5.0"
+		"sky-build-setup": "https://github.com/skybrud/sky-build-setup.git"
 	},
 	"peerDependencies": {
 		"vue": "^2.5.0"
