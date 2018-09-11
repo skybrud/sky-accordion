@@ -263,25 +263,27 @@ const defaults = {
 	},
 };
 
-var index = {
-	install(Vue$$1, options) {
-		const { registerComponents, accordionDefaults } = Object.assign({}, defaults, options);
+function install(Vue$$1, options) {
+	if (install.installed === true) {
+		return;
+	}
 
-		if (registerComponents) {
-			Vue$$1.component(SkyAccordion.name, Object.assign(
-				{},
-				SkyAccordion,
-				{
-					computed: {
-						config() {
-							return Object.assign({}, accordionDefaults, this.options);
-						},
+	const { registerComponents, accordionDefaults } = Object.assign({}, defaults, options);
+
+	if (registerComponents) {
+		Vue$$1.component(SkyAccordion.name, Object.assign(
+			{},
+			SkyAccordion,
+			{
+				computed: {
+					config() {
+						return Object.assign({}, accordionDefaults, this.options);
 					},
 				},
-			));
-		}
-	},
-};
+			},
+		));
+	}
+}
 
 exports.SkyAccordion = SkyAccordion;
-exports.default = index;
+exports.default = install;
