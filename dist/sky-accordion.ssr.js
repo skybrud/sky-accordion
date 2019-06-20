@@ -128,7 +128,7 @@ var __vue_staticRenderFns__ = [];
   /* scoped */
   var __vue_scope_id__ = undefined;
   /* module identifier */
-  var __vue_module_identifier__ = "data-v-77e14797";
+  var __vue_module_identifier__ = "data-v-150eaa9c";
   /* functional template */
   var __vue_is_functional_template__ = false;
   /* component normalizer */
