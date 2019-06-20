@@ -16,8 +16,8 @@ Begin by importing and installing the SkyAccordion Vue plugin:
 import Vue from 'vue';
 import SkyAccordion from 'sky-accordion';
 
-// If you want to use the baseline scss add the following line
-import '${YOUR-PROJECT-ROOT-PATH}/node_modules/sky-accordion/src/SkyAccordion.scss';
+// If you want to use the baseline css add the following line
+import '${YOUR-PROJECT-ROOT-PATH}/node_modules/sky-accordion/dist/sky-accordion.css';
 
 Vue.use(SkyAccordion, {
 	registerComponents: true, // Whether or not to auto-register <SkyAccordion /> component
