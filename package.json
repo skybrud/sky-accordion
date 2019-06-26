@@ -16,7 +16,6 @@
 		"url": "https://github.com/skybrud/sky-accordion.git"
 	},
 	"dependencies": {
-		"sky-reveal": "^0.4.1",
 		"vue": "^2.5.17"
 	},
 	"devDependencies": {

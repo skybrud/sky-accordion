@@ -1,112 +1,111 @@
-import Vue from 'vue';
-import { SkyReveal } from 'sky-reveal';
-
-var SkyAccordionStore = new Vue({
-	data: function data() {
-		return {
-			accordions: [],
-		};
-	},
-	methods: {
-		add: function add(accordion) {
-			var index = this.accordions.indexOf(accordion);
-			if (index === -1) {
-				this.accordions.push(accordion);
-			} else {
-				this.accordions[index] = accordion;
-			}
-		},
-		remove: function remove(accordion) {
-			var index = this.accordions.indexOf(accordion);
-			if (index > -1) {
-				this.accordions.splice(index, 1);
-			}
-		},
-		toggleAll: function toggleAll(bool, exclude) {
-			if ( exclude === void 0 ) exclude = [];
-
-			this.accordions
-				.filter(function (acc) { return exclude.indexOf(acc) === -1; })
-				.forEach(function (acc) {
-					acc.$set(acc, 'isOpen', false);
-				});
-		},
-	},
-});
+//
+//
+//
+//
+//
+//
 
 var script = {
-	name: 'SkyAccordion',
-	components: { SkyReveal: SkyReveal },
+	name: 'SkyAccordionWrapper',
 	props: {
-		open: {
+		active: {
 			type: Boolean,
 			default: false,
 		},
-		id: [Number, String],
-		options: {
-			type: Object,
-			default: function () { return ({}); },
-		},
 	},
 	data: function data() {
 		return {
-			pageYOffset: 0,
-			deepLinked: false,
-			isOpen: this.open,
-			accId: null,
+			// toggle + content HTML Element
+			nodes: {},
+			status: false,
 		};
 	},
 	computed: {
-		config: function config() {
-			return Object.assign({}, this.options);
+		baseClass: function baseClass() {
+			return ((this.$options.$SkyAccordion.settings.kebabName) + "-wrapper");
+		},
+		classes: function classes() {
+			var obj;
+
+			return [
+				this.baseClass,
+				( obj = {}, obj[((this.baseClass) + "--is-active")] = this.status, obj ) ];
 		},
 	},
-	beforeMount: function beforeMount() {
-		// Assign external id to accId, if external Id is undefined generate random Id if accId is null
-		this.accId = this.id && this.id.toString();
+	// status watcher - change toggle element when status changes
+	watch: {
+		active: function active(status) {
+			if (status != null) {
+				this.status = status;
+			}
+		},
 
-		this.deepLinked = this.accId === window.location.hash.substr(1);
+		status: function status(newValue, oldValue) {
+			var this$1 = this;
 
-		this.isOpen = this.deepLinked
-			? this.deepLinked
-			: this.isOpen;
+			this._emit('statusChange', { vm: this, status: newValue, oldStatus: oldValue });
 
-		SkyAccordionStore.add(this);
+			if (this.$parent.onlyOneActive === false) {
+				newValue ? this.open() : this.close();
+			} else if (newValue === true && oldValue === false) {
+				var active = this.$parent.$children
+					.filter(function (el) { return el.status && el._uid !== this$1._uid; });
+
+				if (active.length) {
+					active.forEach(function (el) {
+						el.close();
+					});
+				}
+
+				this.open();
+			} else if (oldValue === true && newValue === false) {
+				this.close();
+			}
+		},
 	},
+
+	// mounting
+
 	mounted: function mounted() {
 		var this$1 = this;
 
-		if (this.deepLinked) {
-			this.pageYOffset = this.currentYOffset(this.$el);
+		this.nodes.toggle = this.$el.querySelector(("." + (this.$options.$SkyAccordion.settings.toggler)));
+		this.nodes.content = this.$el.querySelector(("." + (this.$options.$SkyAccordion.settings.content)));
+		this.$emit('afterNodesBinding', { vm: this, nodes: this.nodes });
 
-			this.$nextTick(function () {
-				this$1.scroll(this$1.pageYOffset);
+		if (this.nodes.toggle !== null) {
+			this.nodes.toggle.addEventListener('click', function () {
+				this$1.toggle();
 			});
 		}
+
+		if (this.active != null) {
+			this.status = this.active;
+		}
 	},
-	beforeDestroy: function beforeDestroy() {
-		SkyAccordionStore.remove(this);
-	},
+
+	// collapse basic instance methods
+
 	methods: {
-		currentYOffset: function currentYOffset(el) {
-			return el.getBoundingClientRect().top + window.pageYOffset - this.config.offset;
+		toggle: function toggle() {
+			this._emit('beforeToggle', this);
+			this.status = !this.status;
+			this._emit('afterToggle', this);
 		},
-		scroll: function scroll(yPosition) {
-			window.scrollTo(0, yPosition);
+		close: function close() {
+			this._emit('beforeClose', this);
+			this.status = false;
+			this._emit('afterClose', this);
 		},
-		toggle: function toggle(bool) {
-			this.isOpen = (typeof bool === 'boolean')
-				? bool
-				: !this.isOpen;
-
-			if (this.config.closeOthersOnOpen && this.isOpen) {
-				// Close all accordions but the current one if configured to
-				SkyAccordionStore.toggleAll(false, [this]);
-			}
-
-			if (this.config.deeplink && this.id) {
-				window.history.replaceState(undefined, undefined, ("#" + (this.id)));
-			}
+		open: function open() {
+			this._emit('beforeOpen', this);
+			this.status = true;
+			this._emit('afterOpen', this);
+		},
+		_emit: function _emit(event, payload) {
+			this.$parent && this.$parent.$el.className.indexOf(((this.$options.$SkyAccordion.settings.kebabName) + "-group")) !== -1
+				? this.$parent.$parent.$emit(event, payload)
+				: this.$parent.$emit(event, payload);
 		},
 	},
 };
@@ -114,7 +113,7 @@ var script = {
 /* script */
             var __vue_script__ = script;
 /* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('li',{class:['sky-accordion', {open : _vm.isOpen}],attrs:{"id":_vm.accId}},[_c('button',{staticClass:"sky-accordion-title",attrs:{"tabindex":"0"},on:{"click":_vm.toggle}},[_vm._t("title")],2),_vm._v(" "),_c('SkyReveal',{attrs:{"open":_vm.isOpen}},[_c('div',{staticClass:"sky-accordion-content"},[_vm._t("default")],2)])],1)};
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.classes},[_vm._t("default",null,{isActive:_vm.status})],2)};
 var __vue_staticRenderFns__ = [];
 
   /* style */
@@ -134,7 +133,7 @@ var __vue_staticRenderFns__ = [];
     var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "SkyAccordion.vue";
+    component.__file = "SkyAccordionWrapper.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -154,7 +153,7 @@ var __vue_staticRenderFns__ = [];
   
 
   
-  var SkyAccordion = __vue_normalize__(
+  var SkyAccordionWrapper = __vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -165,38 +164,178 @@ var __vue_staticRenderFns__ = [];
     undefined
   );
 
-var defaults = {
-	registerComponents: true,
-	accordionDefaults: {
-		offset: 50,
-		deeplink: false,
-		closeOthersOnOpen: false, // if true, only one accordion will be open at a time
+//
+//
+//
+//
+//
+//
+
+var script$1 = {
+	name: 'SkyAccordionGroup',
+	props: {
+		onlyOneActive: {
+			default: false,
+			type: Boolean,
+		},
+	},
+	data: function data() {
+		return {};
+	},
+
+	// computed props for accessing elements
+	computed: {
+		elements: function elements() {
+			return this.$children;
+		},
+		elementsCount: function elementsCount() {
+			return this.$children.length;
+		},
+		activeElements: function activeElements() {
+			return this.$children.filter(function (el) { return el.status; });
+		},
+		inActiveElements: function inActiveElements() {
+			return this.$children.filter(function (el) { return !el.status; });
+		},
+	},
+	methods: {
+		closeAll: function closeAll() {
+			this.$children.forEach(function (el) {
+				el.close();
+			});
+		},
+		openAll: function openAll() {
+			this.$children.forEach(function (el) {
+				el.open();
+			});
+		},
 	},
 };
 
-function install(Vue$$1, options) {
-	if (install.installed === true) {
-		return;
-	}
+/* script */
+            var __vue_script__$1 = script$1;
+            
+/* template */
+var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"sky-accordion-group"},[_vm._t("default")],2)};
+var __vue_staticRenderFns__$1 = [];
 
-	var ref = Object.assign({}, defaults, options);
-	var registerComponents = ref.registerComponents;
-	var accordionDefaults = ref.accordionDefaults;
+  /* style */
+  var __vue_inject_styles__$1 = undefined;
+  /* scoped */
+  var __vue_scope_id__$1 = undefined;
+  /* module identifier */
+  var __vue_module_identifier__$1 = undefined;
+  /* functional template */
+  var __vue_is_functional_template__$1 = false;
+  /* component normalizer */
+  function __vue_normalize__$1(
+    template, style, script,
+    scope, functional, moduleIdentifier,
+    createInjector, createInjectorSSR
+  ) {
+    var component = (typeof script === 'function' ? script.options : script) || {};
 
-	if (registerComponents) {
-		Vue$$1.component(SkyAccordion.name, Object.assign(
-			{},
-			SkyAccordion,
-			{
-				computed: {
-					config: function config() {
-						return Object.assign({}, accordionDefaults, this.options);
-					},
-				},
+    // For security concerns, we use only base name in production mode.
+    component.__file = "SkyAccordionGroup.vue";
+
+    if (!component.render) {
+      component.render = template.render;
+      component.staticRenderFns = template.staticRenderFns;
+      component._compiled = true;
+
+      if (functional) { component.functional = true; }
+    }
+
+    component._scopeId = scope;
+
+    return component
+  }
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var SkyAccordionGroup = __vue_normalize__$1(
+    { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+    __vue_inject_styles__$1,
+    __vue_script__$1,
+    __vue_scope_id__$1,
+    __vue_is_functional_template__$1,
+    __vue_module_identifier__$1,
+    undefined,
+    undefined
+  );
+
+// Default configuration
+var kebabName = 'sky-accordion';
+var pascalName = 'SkyAccordion';
+
+var defaults = {
+	kebabName: kebabName,
+	pascalName: pascalName,
+	toggler: (kebabName + "__toggler"),
+	content: (kebabName + "__content"),
+};
+
+var SkyAccordion = {};
+SkyAccordion.install = function install(Vue, options) {
+	// merge configs
+
+	var settings = Object.assign(defaults, options);
+
+	// creating required components
+
+	Vue.component(((settings.pascalName) + "Wrapper"), SkyAccordionWrapper);
+	Vue.component(((settings.pascalName) + "Group"), SkyAccordionGroup);
+
+	// creates instance of settings in the Vue
+
+	Vue.mixin({
+		created: function created() {
+			this.$options.$SkyAccordion = {
+				settings: settings,
+			};
+		},
+	});
+
+	// content directive
+
+	Vue.directive(((settings.kebabName) + "-content"), {
+
+		// assigning css classes from settings
+
+		bind: function bind(el, binding, vnode) {
+			vnode.elm.classList
+				.add(vnode.context.$options.$SkyAccordion.settings.content);
+		},
+	});
+
+	// toggler directive
+
+	Vue.directive(((settings.kebabName) + "-toggle"), {
+
+		// adding toggle class
+
+		bind: function bind(el, binding, vnode) {
+			vnode.elm.classList
+				.add(vnode.context.$options.$SkyAccordion.settings.toggler);
+		},
+
+		// Creating custom toggler handler
+
+		inserted: function inserted(el, binding, vnode) {
+			if (binding.value != null) {
+				vnode.elm.addEventListener('click', function () {
+					vnode.context.$refs[binding.value].status =
+						!vnode.context.$refs[binding.value].status;
+				});
 			}
-		));
-	}
+		},
+	});
+};
+if (typeof window !== 'undefined' && window.Vue) {
+	window.Vue.use(SkyAccordion);
 }
 
-export default install;
-export { SkyAccordion };
+export default SkyAccordion;

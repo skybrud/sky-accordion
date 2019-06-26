@@ -1,34 +1,74 @@
-import SkyAccordion from './SkyAccordion.vue';
+import SkyAccordionWrapper from './SkyAccordionWrapper.vue';
+import SkyAccordionGroup from './SkyAccordionGroup.vue';
+
+// Default configuration
+const kebabName = 'sky-accordion';
+const pascalName = 'SkyAccordion';
 
 const defaults = {
-	registerComponents: true,
-	accordionDefaults: {
-		offset: 50,
-		deeplink: false,
-		closeOthersOnOpen: false, // if true, only one accordion will be open at a time
-	},
+	kebabName,
+	pascalName,
+	toggler: `${kebabName}__toggler`,
+	content: `${kebabName}__content`,
 };
 
-export { SkyAccordion };
+const SkyAccordion = {};
+SkyAccordion.install = function install(Vue, options) {
+	// merge configs
 
-export default function install(Vue, options) {
-	if (install.installed === true) {
-		return;
-	}
+	const settings = Object.assign(defaults, options);
 
-	const { registerComponents, accordionDefaults } = Object.assign({}, defaults, options);
+	// creating required components
 
-	if (registerComponents) {
-		Vue.component(SkyAccordion.name, Object.assign(
-			{},
-			SkyAccordion,
-			{
-				computed: {
-					config() {
-						return Object.assign({}, accordionDefaults, this.options);
-					},
-				},
-			},
-		));
-	}
+	Vue.component(`${settings.pascalName}Wrapper`, SkyAccordionWrapper);
+	Vue.component(`${settings.pascalName}Group`, SkyAccordionGroup);
+
+	// creates instance of settings in the Vue
+
+	Vue.mixin({
+		created() {
+			this.$options.$SkyAccordion = {
+				settings,
+			};
+		},
+	});
+
+	// content directive
+
+	Vue.directive(`${settings.kebabName}-content`, {
+
+		// assigning css classes from settings
+
+		bind(el, binding, vnode) {
+			vnode.elm.classList
+				.add(vnode.context.$options.$SkyAccordion.settings.content);
+		},
+	});
+
+	// toggler directive
+
+	Vue.directive(`${settings.kebabName}-toggle`, {
+
+		// adding toggle class
+
+		bind(el, binding, vnode) {
+			vnode.elm.classList
+				.add(vnode.context.$options.$SkyAccordion.settings.toggler);
+		},
+
+		// Creating custom toggler handler
+
+		inserted(el, binding, vnode) {
+			if (binding.value != null) {
+				vnode.elm.addEventListener('click', () => {
+					vnode.context.$refs[binding.value].status =
+						!vnode.context.$refs[binding.value].status;
+				});
+			}
+		},
+	});
 };
+if (typeof window !== 'undefined' && window.Vue) {
+	window.Vue.use(SkyAccordion);
+}
+export default SkyAccordion;

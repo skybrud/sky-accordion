@@ -1,21 +1,3 @@
-.sky-accordions {
-	margin: 0;
-	padding: 0;
-}
-
-.sky-accordion {
-	display: block;
-	margin: 0;
-
-	.sky-reveal {
-		overflow: hidden;
-	}
-}
-
-.sky-accordion-title {
-	width: 100%;
-	padding: 0;
-	margin: 0;
-	border: 0;
-	background: none;
+.sky-accordion__content {
+    overflow: hidden;
 }
