@@ -5,10 +5,6 @@
 This module has no bias towards how animations should be done or what library to use. The Exampels in the bottom of this document shows how to use the incredible static CSS solution as well as how to implement GSAP animations
 ```
 
-## Todo
-- implement [a11y](https://www.w3.org/TR/2017/NOTE-wai-aria-practices-1.1-20171214/examples/accordion/accordion.html)
-- deeplinkage support (determine if to be inside or outside module)
-
 # Getting started
 ## Quick start
 
@@ -592,3 +588,7 @@ export default {
     max-height: 500px;
 }
 ```
+
+# Todo
+- implement [a11y](https://www.w3.org/TR/2017/NOTE-wai-aria-practices-1.1-20171214/examples/accordion/accordion.html)
+- deeplinkage support (determine if to be inside or outside module)
