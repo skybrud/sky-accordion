@@ -1,3 +1,4 @@
+<style src="./SkyAccordion.scss"></style>
 <template>
 	<div :class="classes">
 		<slot :isActive="status" />
@@ -105,5 +106,3 @@ export default {
 	},
 };
 </script>
-
-<style src="./SkyAccordion.scss"></style>
