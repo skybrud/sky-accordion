@@ -61,15 +61,15 @@ VueCollapse allows to wrap more elements into a group components `<sky-accordion
 In some cases developers need to create a custom toggle element which not necessarily has to rendered within the wrapper element. VueCollapse provides a solution for that cases. Thanks to Vue's API `ref` we can assign an external (located outside the wrapper) toggler.
 
 ``` html
-<button sky-accordion-toggle="'toggle_first'">Toggle first element</button>
-<button sky-accordion-toggle="'toggle_second'">Toggle second element</button>
+<button sky-accordion-toggle="'toggleFirst'">Toggle first element</button>
+<button sky-accordion-toggle="'toggleSecond'">Toggle second element</button>
 
-<sky-accordion-wrapper ref="toggle_first">
+<sky-accordion-wrapper ref="toggleFirst">
     <div class="my-content" v-sky-accordion-content>
         This is hiddend content
     </div>
 </sky-accordion-wrapper>
-<sky-accordion-wrapper ref="toggle_second">
+<sky-accordion-wrapper ref="toggleSecond">
     <div class="content" v-sky-accordion-content>
         This is hiddend content
     </div>
@@ -122,7 +122,7 @@ In this example we are going to create a custom method which will be responsible
 
 Template:
 ``` html
-<sky-accordion-wrapper ref="open_me">
+<sky-accordion-wrapper ref="openMe">
     <div class="content" v-sky-accordion-content>
         This is hiddend content
     </div>
@@ -191,7 +191,7 @@ Events work the same way it is presented in official Vue documentation.
 
 Template:
 ``` html
-    <sky-accordion-wrapper v-on:beforeClose="my_custom_action">
+    <sky-accordion-wrapper v-on:beforeClose="myCustomAction">
          <div class="header" v-sky-accordion-toggle>
              Click me to toggle content
          </div>
@@ -320,7 +320,7 @@ Vue instance:
 module.exports = {
     ...
     methods : {
-            open_all : function(){
+            openAll : function(){
                 this.$refs.mygroup.openAll(); // opens all elements
             }
         }
@@ -496,6 +496,7 @@ export default {
             this.$refs.mygroup.openAll();
         },
         tweenOpen(element) {
+            // Enable animation to height auto.
             this.tweenSet(element, 'auto');
 
             GSAP.TweenLite.from(
