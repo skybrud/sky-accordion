@@ -1,8 +1,43 @@
 > SkyAccordion - a flexible accordion plugin for Vue.js 2, build on vue2-collapse
 
-# Animations !important
+## Animations !important
 This module has no bias towards how animations should be done or what library to use. The Exampels in the bottom of this document shows how to use the incredible static CSS solution as well as how to implement GSAP animations
 
+**Table of contents**
+---
+- [Getting started](#Getting-started)
+  - [Quick start](#Quick-start)
+  - [Usage](#Usage)
+    - [Basic example](#Basic-example)
+    - [Grouping elements](#Grouping-elements)
+    - [Custom toggle element](#Custom-toggle-element)
+    - [Nesting](#Nesting)
+- [Plugin](#Plugin)
+  - [Components](#Components)
+    - [sky-accordion-wrapper](#sky-accordion-wrapper)
+      - [Methods](#Methods)
+        - [Usage](#Usage-1)
+      - [Events](#Events)
+        - [Usage](#Usage-2)
+      - [Custom properties](#Custom-properties)
+        - [Usage](#Usage-3)
+      - [Data properties](#Data-properties)
+    - [sky-accordion-group](#sky-accordion-group)
+      - [Computed properties](#Computed-properties)
+      - [Custom properties](#Custom-properties-1)
+      - [Methods](#Methods-1)
+        - [Usage](#Usage-4)
+  - [Directives](#Directives)
+    - [v-sky-accordion-content](#v-sky-accordion-content)
+    - [v-sky-accordion-toggle](#v-sky-accordion-toggle)
+- [Examples](#Examples)
+  - [Accordion](#Accordion)
+  - [Accordion with closeAll + openAll option](#Accordion-with-closeAll--openAll-option)
+  - [Single wrapper with header toggle + external button toggle](#Single-wrapper-with-header-toggle--external-button-toggle)
+  - [Accordion GSAP Tweelite animation](#Accordion-GSAP-Tweelite-animation)
+  - [Single wrapper GSAP Tweelite animation](#Single-wrapper-GSAP-Tweelite-animation)
+  - [CSS only animation](#CSS-only-animation)
+- [Todo](#Todo)
 
 # Getting started
 ## Quick start
