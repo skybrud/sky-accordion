@@ -1,9 +1,8 @@
 > SkyAccordion - a flexible accordion plugin for Vue.js 2, build on vue2-collapse
 
-## Animations
-```
+# Animations !important
 This module has no bias towards how animations should be done or what library to use. The Exampels in the bottom of this document shows how to use the incredible static CSS solution as well as how to implement GSAP animations
-```
+
 
 # Getting started
 ## Quick start
