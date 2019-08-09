@@ -4,6 +4,7 @@
 //
 //
 //
+//
 
 var script = {
 	name: 'SkyAccordionWrapper',

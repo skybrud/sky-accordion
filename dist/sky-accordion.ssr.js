@@ -8,6 +8,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 //
 //
 //
+//
 
 var script = {
 	name: 'SkyAccordionWrapper',
@@ -125,7 +126,7 @@ var __vue_staticRenderFns__ = [];
   /* scoped */
   var __vue_scope_id__ = undefined;
   /* module identifier */
-  var __vue_module_identifier__ = "data-v-708b7c0b";
+  var __vue_module_identifier__ = "data-v-28a5bccb";
   /* functional template */
   var __vue_is_functional_template__ = false;
   /* component normalizer */
