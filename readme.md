@@ -381,7 +381,7 @@ However if there is a need to create the toggle element somewhere else, not insi
     :only-one-active="false"
 >
     <SkyAccordionWrapper>
-        <template v-slot="{ isActive }">
+        <template slot-scope="{ isActive }">
             <div
                 class="header"
                 v-sky-accordion-toggle
@@ -440,7 +440,7 @@ export default {
         :only-one-active="false"
     >
         <SkyAccordionWrapper>
-            <template v-slot="{ isActive }">
+            <template slot-scope="{ isActive }">
                 <div
                     class="header"
                     v-sky-accordion-toggle
