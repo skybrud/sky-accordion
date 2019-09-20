@@ -6,37 +6,37 @@ This module has no bias towards how animations should be done or what library to
 **Table of contents**
 ---
 - [Getting started](#getting-started)
-  - [Quick start](#quick-start)
-  - [Usage](#usage)
-    - [Basic example](#basic-example)
-    - [Grouping elements](#grouping-elements)
-    - [Custom toggle element](#custom-toggle-element)
-    - [Nesting](#nesting)
+	- [Quick start](#quick-start)
+	- [Usage](#usage)
+		- [Basic example](#basic-example)
+		- [Grouping elements](#grouping-elements)
+		- [Custom toggle element](#custom-toggle-element)
+		- [Nesting](#nesting)
 - [Plugin](#plugin)
-  - [Components](#components)
-    - [sky-accordion-wrapper](#sky-accordion-wrapper)
-      - [Methods](#methods)
-        - [Usage](#usage-1)
-      - [Events](#events)
-        - [Usage](#usage-2)
-      - [Custom properties](#custom-properties)
-        - [Usage](#usage-3)
-      - [Data properties](#data-properties)
-    - [sky-accordion-group](#sky-accordion-group)
-      - [Computed properties](#computed-properties)
-      - [Custom properties](#custom-properties-1)
-      - [Methods](#methods-1)
-        - [Usage](#usage-4)
-  - [Directives](#directives)
-    - [v-sky-accordion-content](#v-sky-accordion-content)
-    - [v-sky-accordion-toggle](#v-sky-accordion-toggle)
+	- [Components](#components)
+		- [sky-accordion-wrapper](#sky-accordion-wrapper)
+			- [Methods](#methods)
+				- [Usage](#usage-1)
+			- [Events](#events)
+				- [Usage](#usage-2)
+			- [Custom properties](#custom-properties)
+				- [Usage](#usage-3)
+			- [Data properties](#data-properties)
+		- [sky-accordion-group](#sky-accordion-group)
+			- [Computed properties](#computed-properties)
+			- [Custom properties](#custom-properties-1)
+			- [Methods](#methods-1)
+				- [Usage](#usage-4)
+	- [Directives](#directives)
+		- [v-sky-accordion-content](#v-sky-accordion-content)
+		- [v-sky-accordion-toggle](#v-sky-accordion-toggle)
 - [Examples](#examples)
-  - [Accordion](#accordion)
-  - [Accordion with closeAll + openAll option](#accordion-with-closeall--openall-option)
-  - [Single wrapper with header toggle + external button toggle](#single-wrapper-with-header-toggle--external-button-toggle)
-  - [Accordion GSAP Tweelite animation](#accordion-gsap-tweelite-animation)
-  - [Single wrapper GSAP Tweelite animation](#single-wrapper-gsap-tweelite-animation)
-  - [CSS only animation](#css-only-animation)
+	- [Accordion](#accordion)
+	- [Accordion with closeAll + openAll option](#accordion-with-closeall--openall-option)
+	- [Single wrapper with header toggle + external button toggle](#single-wrapper-with-header-toggle--external-button-toggle)
+	- [Accordion GSAP TweenLite animation](#accordion-gsap-tweenlite-animation)
+	- [Single wrapper GSAP Tweelite animation](#single-wrapper-gsap-tweelite-animation)
+	- [CSS only animation](#css-only-animation)
 - [Todo](#todo)
 
 # Getting started
@@ -80,7 +80,7 @@ The div element with `header` class thanks to `v-sky-accordion-toggle` directive
 
 ### Grouping elements
 
-VueCollapse allows to wrap more elements into a group components `<sky-accordion-group></sky-accordion-group>`, which helps with code organisation and provides some additional functionality.
+SkyAccordion allows to wrap more elements into a group components `<sky-accordion-group></sky-accordion-group>`, which helps with code organisation and provides some additional functionality.
 
 ``` html
 <sky-accordion-group :only-one-active="true">
@@ -93,7 +93,7 @@ VueCollapse allows to wrap more elements into a group components `<sky-accordion
 **By the default, each element will stay opened after toggle action, however setting the `only-one-active` to `true` will prevent group from opening more than one element at the same time- same behaviour as non-grouped elements.**
 ### Custom toggle element
 
-In some cases developers need to create a custom toggle element which not necessarily has to rendered within the wrapper element. VueCollapse provides a solution for that cases. Thanks to Vue's API `ref` we can assign an external (located outside the wrapper) toggler.
+In some cases developers need to create a custom toggle element which not necessarily has to rendered within the wrapper element. SkyAccordion provides a solution for that cases. Thanks to Vue's API `ref` we can assign an external (located outside the wrapper) toggler.
 
 ``` html
 <button sky-accordion-toggle="'toggleFirst'">Toggle first element</button>
@@ -115,7 +115,7 @@ In some cases developers need to create a custom toggle element which not necess
 
 
 ### Nesting
-SkyAccordion allows to nest elements inside each other. The nested element should be rendered within the `v-sky-accordion-content` directive element.
+SkyAccordion allows nesting elements inside each other. The nested element should be rendered within the `v-sky-accordion-content` directive element.
 
 ``` html
 <sky-accordion-wrapper>
@@ -137,11 +137,11 @@ SkyAccordion allows to nest elements inside each other. The nested element shoul
 
 # Plugin
 ## Components
-In this section of documentation you will find more detailed description the plugin. Each custom component provides own events and methods which can be used in order to extend functionality.
+In this section of documentation you will find more detailed description the plugin. Each custom component provides its own events and methods which can be used in order to extend functionality.
 
 ### sky-accordion-wrapper
-Wrapper component which should **always** be a parent of elements which are using `v-sky-accordion-content ` and `v-sky-accordion-toggle` directives.
-Each of the `sky-accordion-wrapper` component instance can use following methods, events and stores data, which can be used to perform custom actions.
+Wrapper component which should **always** be a parent of elements which are using the `v-sky-accordion-content ` directive and the `v-sky-accordion-toggle` directive (unless the toggle is used with a reference to a `sky-accordion-wrapper` as showcased in the [Custom toggle element](#custom-toggle-element) section).
+Each of the `sky-accordion-wrapper` component instances can use following methods, events and stores data, which can be used to perform custom actions.
 
 #### Methods
 
@@ -153,7 +153,7 @@ Each of the `sky-accordion-wrapper` component instance can use following methods
 
 ##### Usage
 
-In this example we are going to create a custom method which will be responsible for opening referred element. In order to get the instance of component we are using `ref` once again.
+In this example we are going to create a custom method which will be responsible for opening a referred element. In order to get the instance of the component we are using `ref` once again.
 
 Template:
 ``` html
@@ -169,7 +169,7 @@ Vue instance:
 module.exports = {
     ...
     methods : {
-        triggerReferedRlement : function(){
+        triggerReferedElement : function(){
             this.$refs.openMe.open();
         }
     }
@@ -181,7 +181,7 @@ You can also make a reference of group component, that allows you to perform act
 
 Template:
 ``` html
-<sky-accordion-wrapper ref="mygroup">
+<sky-accordion-group ref="mygroup">
     <sky-accordion-wrapper>
         <div class="my-content" v-sky-accordion-content>
             This is hiddend content
@@ -192,7 +192,7 @@ Template:
             This is hiddend content
         </div>
     </sky-accordion-wrapper>
-</sky-accordion-wrapper>
+</sky-accordion-group>
 ```
 
 Vue instance:
@@ -200,7 +200,7 @@ Vue instance:
 module.exports = {
     ...
     methods : {
-            open_second : function(){
+            openSecond : function(){
                 this.$refs.mygroup.elements[1].open(); // opens second element
             }
         }
@@ -381,7 +381,7 @@ However if there is a need to create the toggle element somewhere else, not insi
     :only-one-active="false"
 >
     <SkyAccordionWrapper>
-        <template slot-scope="{ isActive }">
+        <template v-slot="{ isActive }">
             <div
                 class="header"
                 v-sky-accordion-toggle
@@ -440,7 +440,7 @@ export default {
         :only-one-active="false"
     >
         <SkyAccordionWrapper>
-            <template slot-scope="{ isActive }">
+            <template v-slot="{ isActive }">
                 <div
                     class="header"
                     v-sky-accordion-toggle
@@ -500,7 +500,7 @@ export default {
 ```
 
 
-## Accordion GSAP Tweelite animation
+## Accordion GSAP TweenLite animation
 ```javascript
 // This import way ensures SSR executes without errors
 const GSAP = {};
@@ -579,11 +579,11 @@ export default {
         }
     },
     methods: {
-        closeAll() {
-            this.$refs.mygroup.closeAll();
+        close() {
+            this.$refs.singleton.close();
         },
-        openAll() {
-            this.$refs.mygroup.openAll();
+        open() {
+            this.$refs.singleton.open();
         },
         tweenOpen(element) {
             this.tweenSet(element, 'auto');
