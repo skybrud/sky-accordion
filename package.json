@@ -1,6 +1,6 @@
 {
 	"name": "sky-accordion",
-	"version": "2.0.2",
+	"version": "2.1.0",
 	"description": "Vue component for grouped foldable content",
 	"main": "./dist/sky-accordion.ssr.js",
 	"module": "./dist/sky-accordion.esm.js",
