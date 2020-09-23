@@ -108,6 +108,7 @@ var script = {
 			this._emit('afterOpen', this);
 		},
 		_emit: function _emit(event, payload) {
+			this.$emit(event, payload);
 			this.$parent && this.$parent.$el.className.indexOf(((this.$options.$SkyAccordion.settings.kebabName) + "-group")) !== -1
 				? this.$parent.$parent.$emit(event, payload)
 				: this.$parent.$emit(event, payload);
@@ -126,7 +127,7 @@ var __vue_staticRenderFns__ = [];
   /* scoped */
   var __vue_scope_id__ = undefined;
   /* module identifier */
-  var __vue_module_identifier__ = "data-v-28a5bccb";
+  var __vue_module_identifier__ = "data-v-fae22f32";
   /* functional template */
   var __vue_is_functional_template__ = false;
   /* component normalizer */

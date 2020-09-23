@@ -104,6 +104,7 @@ var script = {
 			this._emit('afterOpen', this);
 		},
 		_emit: function _emit(event, payload) {
+			this.$emit(event, payload);
 			this.$parent && this.$parent.$el.className.indexOf(((this.$options.$SkyAccordion.settings.kebabName) + "-group")) !== -1
 				? this.$parent.$parent.$emit(event, payload)
 				: this.$parent.$emit(event, payload);
